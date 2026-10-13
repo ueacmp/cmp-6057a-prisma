@@ -3,7 +3,10 @@
   "onCreateCommand": "bash .devcontainer/configure-universal.sh",
   "updateContentCommand": "npm ci --prefer-offline --no-audit --no-fund",
   "waitFor": "postStartCommand",
-  "postAttachCommand": "npm run dev -- --hostname 0.0.0.0 --port 3000",
+  "postAttachCommand": {
+    "Prisma Studio": "npm run db:studio",
+    "Next.js": "bash .devcontainer/start-next.sh"
+  },
   "forwardPorts": [
     3000,
     5555
