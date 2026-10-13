@@ -10,3 +10,7 @@ fi
 
 # The Copilot update hook only runs when this marker exists.
 sudo rm -f /etc/devcontainer-copilot-cli/auto-update
+
+if [[ ! -e .env ]]; then
+  printf '%s\n' 'DATABASE_URL="postgresql://postgres:postgres@127.0.0.1:5432/app?schema=public"' > .env
+fi

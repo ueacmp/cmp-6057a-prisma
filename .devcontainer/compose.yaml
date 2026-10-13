@@ -1,15 +1,4 @@
 services:
-  app:
-    image: mcr.microsoft.com/devcontainers/universal:linux
-    command: sleep infinity
-    volumes:
-      - ../..:/workspaces:cached
-    environment:
-      DATABASE_URL: postgresql://postgres:postgres@db:5432/app?schema=public
-    depends_on:
-      db:
-        condition: service_healthy
-
   db:
     image: postgres:17-bookworm
     restart: unless-stopped
@@ -17,6 +6,8 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: app
+    ports:
+      - "127.0.0.1:5432:5432"
     volumes:
       - postgres-data:/var/lib/postgresql/data
     healthcheck:
