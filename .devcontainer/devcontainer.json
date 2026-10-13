@@ -1,0 +1,32 @@
+{
+  "name": "Next.js + PostgreSQL + Prisma",
+  "onCreateCommand": "bash .devcontainer/configure-universal.sh",
+  "updateContentCommand": "npm ci --prefer-offline --no-audit --no-fund",
+  "waitFor": "updateContentCommand",
+  "postAttachCommand": "npm run dev -- --hostname 0.0.0.0 --port 3000",
+  "forwardPorts": [
+    3000,
+    5555
+  ],
+  "portsAttributes": {
+    "3000": {
+      "label": "Next.js dev server",
+      "onAutoForward": "notify"
+    },
+    "5555": {
+      "label": "Prisma Studio",
+      "onAutoForward": "notify",
+      "visibility": "private"
+    }
+  },
+  "customizations": {
+    "codespaces": {
+      "disableAutomaticConfiguration": true
+    }
+  },
+  "dockerComposeFile": "compose.yaml",
+  "service": "app",
+  "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
+  "remoteUser": "codespace",
+  "shutdownAction": "stopCompose"
+}
